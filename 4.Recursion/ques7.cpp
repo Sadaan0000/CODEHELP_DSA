@@ -73,6 +73,6 @@ int main(){
     for( int i:arr ){
         cout << i << " ";
     }
-
+    
     return 0;
 }
