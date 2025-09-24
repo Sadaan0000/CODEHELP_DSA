@@ -18,7 +18,7 @@ class Node{
         this-> next = NULL; 
     }
     ~Node(){
-       
+       cout << "Node with value: " << this->data << " deleted" << endl;
     }
 };
 
@@ -196,21 +196,22 @@ int main(){
     second -> next = third;
     third -> prev = second;
 
+    print(head);
+    cout << endl;
+
     insertAtHead(head,tail,100);
-    // print(head);
-    
-    // cout << endl;
+    print(head);
+    cout << endl;
 
     insertAtTail(head,tail,101);
-    // print(head);
-
-    // cout << endl;
+    print(head);
+    cout << endl;
 
     insertAtPosition(head,tail,150,5);
     print(head);
     cout << endl;
 
-    deleteFromPosition(head,tail,7);
+    deleteFromPosition(head,tail,4);
     print(head);
 
     return 0;
