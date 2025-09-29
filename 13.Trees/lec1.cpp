@@ -116,8 +116,6 @@ int height(Node* root){
     return ans;
 } 
 
-
-
 void printTree(Node* root, int space = 0, int gap = 5) {
     if (root == NULL) return;
 
