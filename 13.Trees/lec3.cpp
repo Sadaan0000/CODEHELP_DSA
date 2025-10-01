@@ -1,5 +1,6 @@
 // BUILD TREE FROM INORDER PREORDER POSTORDER TRAVERSAL
-// TOPVIEW TRAVERSAL
+// TOPVIEW, BOTTOMVIEW, LEFTVIEW, RIGHTVIEW TRAVERSAL
+// BOUNDARY TRAVERSAL 
 
 #include<iostream>
 #include<unordered_map>
@@ -246,6 +247,72 @@ void printRightView( Node* root, vector<int> &ans, int level){
     printRightView(root->left, ans, level+1);
 }
 
+void printLeftNodes(Node* root){
+    // base case
+    // if root is null then go back
+    if( root == NULL ){
+        return;
+    }
+    // if root is a leaf node then go back
+    if( root->left == NULL & root->right == NULL ){
+        return;
+    }
+
+    cout << root->data << " ";
+
+    if( root->left){
+        printLeftNodes(root->left);
+    }
+    else{
+        printLeftNodes(root->right);
+    }
+
+}
+void printLeafNodes(Node* root){
+    // base case
+    if( root == NULL ){
+        return;
+    }
+
+    if( root->left == NULL && root->right == NULL ){
+        cout << root->data << " ";
+    }
+
+    printLeafNodes(root->left);
+    printLeafNodes(root->right);
+}
+void printRightNodes(Node* root){
+    // base case
+    // if root is null then go back
+    if( root == NULL ){
+        return;
+    }
+    // if root is a leaf node then go back
+    if( root->left == NULL & root->right == NULL ){
+        return;
+    }
+    if(root->right){
+        printRightNodes(root->right);
+    }
+    else{
+        printRightNodes(root->left);
+    }
+
+    cout << root->data << " ";
+}
+void boundaryTraversal(Node* root){ 
+    if( root == NULL ){
+        return;
+    }
+    cout << root->data << " ";
+    // a
+    printLeftNodes(root->left);
+    // b 
+    printLeafNodes(root);
+    // c
+    printRightNodes(root->right);
+}
+
 int main(){
     // int inorder[] = {40,20,50,10,60,30,70};
     // int preorder[] = {10,20,40,50,30,60,70};
@@ -255,13 +322,13 @@ int main(){
     // int inorderEnd = size-1;
     // Node* root = buildTree(inorder, preorder, size, preIndex, inorderStart, inorderEnd);
 
-    int inorder[] = {40,20,50,10,60,30,70};
-    int postorder[] = {40,50,20,60,70,30,10};
-    int size = 7;
-    int postIndex = size-1;
-    int inorderStart = 0;
-    int inorderEnd = size-1;
-    Node* root = buildTreeFromPostorderInorder( inorder, postorder, size, postIndex, inorderStart, inorderEnd );
+    // int inorder[] = {40,20,50,10,60,30,70};
+    // int postorder[] = {40,50,20,60,70,30,10};
+    // int size = 7;
+    // int postIndex = size-1;
+    // int inorderStart = 0;
+    // int inorderEnd = size-1;
+    // Node* root = buildTreeFromPostorderInorder( inorder, postorder, size, postIndex, inorderStart, inorderEnd );
 
     // cout << "TopView Traversal: " << endl;
     // printTopView(root);
@@ -271,28 +338,34 @@ int main(){
     // printBottomView(root);
     // cout << endl;
 
-    // vector<int> ans;
-    // int level = 0;
+    // vector<int> ans1;
+    // int level1 = 0;
     // cout << "Left Tree View : " << endl;
-    // printLeftTree(root,ans,level);
-    // for( auto i:ans){
+    // printLeftView(root,ans1,level1);
+    // for( auto i:ans1){
     //     cout << i << " ";
     // }
+    // cout << endl;
 
-    // vector<int> ans;
-    // int level = 0;
+    // vector<int> ans2;
+    // int level2 = 0;
     // cout << "Right Tree View : " << endl;
-    // printRightView(root,ans,level);
-    // for( auto i:ans){
+    // printRightView(root,ans2,level2);
+    // for( auto i:ans2){
     //     cout << i << " ";
     // }
+    // cout << endl;
 
     // cout << "Level Order Traversal: " << endl;
     // levelOrderTraversal(root);
     // cout << endl;
 
-    cout << "\n\nTree structure (sideways): \n";
-    printTree(root);
+    // cout << "Boundary Traversal: " << endl;
+    // boundaryTraversal(root);
+    // cout << endl;
+
+    // cout << "\n\nTree structure (sideways): \n";
+    // printTree(root);
 
     return 0;
 }
