@@ -37,7 +37,6 @@ class Safari:public Car{
 
 };
 
-
 class A{
         public:
         int chemistry;
@@ -53,6 +52,7 @@ class B{
             chemistry = 222;
         }
 };
+
 class C:public A,public B{
     public:
     int maths;
@@ -85,28 +85,27 @@ class Parameter{
 
 int main(){
 
-        Parameter obj1,obj2;
-        obj1.val = 7;
-        obj2.val = 2;
+    Parameter obj1,obj2;
+    obj1.val = 7;
+    obj2.val = 2;
 
-        //this shold print the difference between them 
-        obj1 + obj2;
+    //this shold print the difference between them 
+    obj1 + obj2;
 
-
-        // Maths obj;
-        // cout << obj.sum(10,12.01);   
+    // Maths obj;
+    // cout << obj.sum(10,12.01);   
                   
-        // C obj;
-        // cout << " " << obj.A::chemistry << " " << obj.maths << endl;
-        // cout << " " << obj.B::chemistry << " " << obj.maths << endl;
+    // C obj;
+    // cout << " " << obj.A::chemistry << " " << obj.maths << endl;
+    // cout << " " << obj.B::chemistry << " " << obj.maths << endl;
 
-//   Safari future;
-//   future.speedUp();  
-//   future.breakMaaro();
+    // Safari future;
+    // future.speedUp();  
+    // future.breakMaaro();
 
-//     dog d1;
-//   d1.print();
-//  d1.print();
+    // dog d1;
+    // d1.print();
+    // d1.print();
 
 
     return 0;

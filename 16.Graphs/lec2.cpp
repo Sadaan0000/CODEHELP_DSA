@@ -82,8 +82,27 @@ class Graph{
         return false;
     }
 
+    bool check_CDG_usingDFS(int src, unordered_map<int,bool> &visited, unordered_map<int,bool> dfsVisited ){
+        
+        visited[src] = true;
+        dfsVisited[src] = true;
 
+        for( auto nbr:adjlist[src] ){
+            if( !visited[nbr]){
+                bool aagekaAnswer = check_CDG_usingDFS(nbr,visited,dfsVisited);
+                if( aagekaAnswer == true )
+                    return true;
+            }
 
+            if( visited[nbr] == true && dfsVisited[nbr] == true ){
+                return true;
+            }
+        }
+        dfsVisited[src] = false;
+        return false;
+    }
+
+    
 
 };
 
@@ -94,55 +113,72 @@ int main(){
 
     //n -> number of nodes in graph
     int n = 5;
-    g.addEdge(0,1,0);
-    g.addEdge(1,2,0);
-    g.addEdge(2,3,0);
-    g.addEdge(3,4,0);
-    g.addEdge(4,4,0);
+    g.addEdge(0,1,1);
+    g.addEdge(1,2,1);
+    g.addEdge(2,3,1);
+    g.addEdge(3,4,1);
+    g.addEdge(4,0,1);
 
     g.printAdjacencyList();
     cout << endl;
 
-    bool ansBFS = false;
-    unordered_map<int, bool> visitedBFS;
-
-    //run a loop for all nodes
-    for(int i=0; i<n; i++) {
-        if(!visitedBFS[i]) {
-            ansBFS = g.isCyclicBFS(i,visitedBFS);
-            if( ansBFS == true )
+    bool ans = false ;
+    unordered_map<int,bool> visited;
+    unordered_map<int, bool> dfsVisited;
+    for(int i=0; i<n; i++ ){
+        if( !visited[i] ) {
+            ans = g.check_CDG_usingDFS( i,visited,dfsVisited );
+            if( ans == true ) 
                 break;
         }
     }
-
-    if( ansBFS == true ){
-        cout << "Cycle is present. " << endl;
-    }
-    else{
-        cout << "Cycle is not present. " << endl;
-    }
-
     
-
-
-    bool ansDFS = false;
-    unordered_map<int, bool> visitedDFS;
-
-    //run a loop for all nodes
-    for(int i=0; i<n; i++) {
-        if(!visitedDFS[i]) {
-            ansDFS = g.isCyclicDFS(i,visitedDFS, -1);
-            if( ansDFS == true )
-                break;
-        }
-    }
-
-    if( ansDFS == true ){
+    if( ans == true ){
         cout << "Cycle is present. " << endl;
     }
     else{
         cout << "Cycle is not present. " << endl;
     }
+
+
+
+    // bool ansBFS = false;
+    // unordered_map<int, bool> visitedBFS;
+
+    // //run a loop for all nodes
+    // for(int i=0; i<n; i++) {
+    //     if(!visitedBFS[i]) {
+    //         ansBFS = g.isCyclicBFS(i,visitedBFS);
+    //         if( ansBFS == true )
+    //             break;
+    //     }
+    // }
+
+    // if( ansBFS == true ){
+    //     cout << "Cycle is present. " << endl;
+    // }
+    // else{
+    //     cout << "Cycle is not present. " << endl;
+    // }
+
+    // bool ansDFS = false;
+    // unordered_map<int, bool> visitedDFS;
+
+    // //run a loop for all nodes
+    // for(int i=0; i<n; i++) {
+    //     if(!visitedDFS[i]) {
+    //         ansDFS = g.isCyclicDFS(i,visitedDFS, -1);
+    //         if( ansDFS == true )
+    //             break;
+    //     }
+    // }
+
+    // if( ansDFS == true ){
+    //     cout << "Cycle is present. " << endl;
+    // }
+    // else{
+    //     cout << "Cycle is not present. " << endl;
+    // }
 
     return 0;
 }
